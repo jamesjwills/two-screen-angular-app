@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Subscription } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,7 +16,7 @@ import { NgIf } from '@angular/common';
  * Represents the CatImageComponent class.
  * This component is responsible for displaying a cat image and managing user interactions.
  */
-export class CatImageComponent implements OnInit {
+export class CatImageComponent implements OnInit, OnDestroy {
   title: string = `Here's a cat!`;
   isCorrect: boolean = false;
   answer: number = 0;
@@ -55,19 +55,19 @@ export class CatImageComponent implements OnInit {
    */
   ngOnInit(): void {
     // Subscribe to the isCorrect$ observable to get the latest value of isCorrect
-    this.subscription = this.userService.isCorrect$.subscribe((value) => {
+    this.subscription.add(this.userService.isCorrect$.subscribe((value) => {
       this.isCorrect = value;
-    });
+    }));
 
     // Subscribe to the answer$ observable to get the latest value of answer
-    this.subscription = this.userService.answer$.subscribe((value) => {
+    this.subscription.add(this.userService.answer$.subscribe((value) => {
       this.answer = value;
-    });
+    }));
 
     // Subscribe to the userAnswer$ observable to get the latest value of userAnswer
-    this.subscription = this.userService.userAnswer$.subscribe((value) => {
+    this.subscription.add(this.userService.userAnswer$.subscribe((value) => {
       this.userAnswer = value;
-    });
+    }));
 
     // Fetch a cat image
     this.fetchCatImage();
