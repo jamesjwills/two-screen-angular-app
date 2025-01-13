@@ -6,23 +6,37 @@
 </section>
 
 <!-- Display the answer -->
-<!-- <p>Answer: {{ getAnswer() }}</p> -->
 
-<form class="answer__form" (ngSubmit)="onSubmit(userAnswer, answerForm)" #answerForm="ngForm">
+<form class="answer__form" 
+      (ngSubmit)="onSubmit(userAnswer, answerForm)" 
+      #answerForm="ngForm">
   <mat-form-field>
-    <input matInput type="number" placeholder="Answer" [(ngModel)]="userAnswer" name="userAnswer" required>
+    <input matInput type="number" 
+           placeholder="Answer" 
+           [(ngModel)]="userAnswer" 
+           name="userAnswer" 
+           required>
   </mat-form-field>
 
-  <button mat-flat-button color="primary" type="submit" [disabled]="!userAnswer"
-    class="answer__form--submit-button">Submit
+  <button mat-flat-button color="primary" 
+          type="submit" 
+          [disabled]="!userAnswer"
+          class="answer__form--submit-button">Submit
   </button>
 </form>
 
 <!-- Display the button only when the answer is correct and the form is submitted -->
 <section class="answer__response">
-  <p class="answer__reponse--correct" *ngIf="getIsCorrect()">{{ messageWhenCorrect }}</p>
-  <p class="answer__reponse--incorrect" *ngIf="!getIsCorrect() && isSubmitted">{{ messageWhenIncorrect }}</p>
-  <button class="answer__response--reward-button" *ngIf="getIsCorrect()" mat-flat-button color="primary"
-    routerLink="/cat-image">Claim Reward
+  <p class="answer__reponse--correct" 
+     *ngIf="getIsCorrect()">{{ messageWhenCorrect }}
+  </p>
+  <p class="answer__reponse--incorrect" 
+     *ngIf="!getIsCorrect() && isSubmitted">
+     {{ messageWhenIncorrect }}
+  </p>
+  <button class="answer__response--reward-button" 
+          *ngIf="getIsCorrect()" 
+          mat-flat-button color="primary"
+          routerLink="/cat-image">Claim Reward
   </button>
 </section>
